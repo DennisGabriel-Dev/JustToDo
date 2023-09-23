@@ -1,0 +1,37 @@
+<h1>JustToDo</h1>
+<% @task_lists.each do |task_list| %>
+<table>
+  
+  <thead>
+    <tr>
+    <th> Title </th>
+    </tr>
+  </thead>
+  <tbody>
+     <tr>
+       <td><%= task_list.name %></td>
+      <table>
+
+         <thead>
+          <tr>
+          <th> title <th>
+          <th> status <th>
+          </tr>
+          </thead>
+          <tbody>
+            <tr>
+            <%  task_list.tasks.each do |task| %>
+              <td> <%= task.title %></td>
+              <td>
+              <%= task.status%>
+              </td>
+            </tr>
+            <% end %>
+          </tbody>
+      </table>
+    </tr>
+  </tbody> 
+</table>
+<% end %>
+
+<%=  button_to "logout", destroy_user_session_path, method: :delete%>
