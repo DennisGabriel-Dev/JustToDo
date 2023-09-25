@@ -1,37 +1,32 @@
-<h1>JustToDo</h1>
-<% @task_lists.each do |task_list| %>
-<table>
-  
-  <thead>
-    <tr>
-    <th> Title </th>
-    </tr>
-  </thead>
-  <tbody>
-     <tr>
-       <td><%= task_list.name %></td>
-      <table>
-
-         <thead>
-          <tr>
-          <th> title <th>
-          <th> status <th>
-          </tr>
-          </thead>
-          <tbody>
-            <tr>
-            <%  task_list.tasks.each do |task| %>
-              <td> <%= task.title %></td>
-              <td>
-              <%= task.status%>
-              </td>
-            </tr>
+<body>
+  <div class = "container">
+    <h1> To Do </h1>
+    <% @task_lists.each  do |task_list| %>
+        <details>
+          <summary> <%= task_list.name %></summary>
+         
+      <table class="table table-bordered table-striped table-covered">
+        <thead>
+          <% if not task_list.tasks.empty? %>
+            <th> Title </th>
+            <th> Status </th>
+          <% end %>
+        </thead>
+        <tbody>
+          <% task_list.tasks.each do |task|%>
+            <% if not task.title.nil? %>
+              <td><%= task.title%></td>
+              <td><%=  task.status%></td>
             <% end %>
-          </tbody>
-      </table>
-    </tr>
-  </tbody> 
-</table>
-<% end %>
+          <% end %>
+        <tbody>
+        </div>
+    </table>
+    </details>
+      <% end %>
+   
+    
+    <%=  button_to "logout", destroy_user_session_path, method: :delete%>
+  
 
-<%=  button_to "logout", destroy_user_session_path, method: :delete%>
+</body>

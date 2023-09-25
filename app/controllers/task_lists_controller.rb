@@ -50,6 +50,9 @@ class TaskListsController < ApplicationController
 
   # DELETE /task_lists/1 or /task_lists/1.json
   def destroy
+    id_tl = :id
+    @tasks = Task.where("task_list_id = ?", id_tl)
+    @tasks.destroy
     @task_list.destroy
 
     respond_to do |format|
