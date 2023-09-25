@@ -1,4 +1,4 @@
-<body>
+<body class="">
   <div class = "container">
     <h1> To Do </h1>
     <% @task_lists.each  do |task_list| %>
@@ -10,18 +10,23 @@
           <% if not task_list.tasks.empty? %>
             <th> Title </th>
             <th> Status </th>
+            <th> Delete </th>
           <% end %>
         </thead>
         <tbody>
           <% task_list.tasks.each do |task|%>
             <% if not task.title.nil? %>
-              <td><%= task.title%></td>
-              <td><%=  task.status%></td>
+            <tr>
+              <td class="col-3"><%= task.title %></td>
+              <td class = "col-1"><%=  task.status%></td>
+              <td> <%= button_to "Destroy this task", task, method: :delete %></td>
+            </tr>
             <% end %>
           <% end %>
         <tbody>
         </div>
     </table>
+     <%= button_to "Destroy this task list", task_list, method: :delete %>
     </details>
       <% end %>
    
