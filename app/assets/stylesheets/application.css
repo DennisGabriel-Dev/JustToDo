@@ -11264,8 +11264,8 @@ body {
 #modal {
   position: absolute;
   z-index: 2;
-  right: 10px;
-  top: 10px;
+  right: 50vw;
+  top: 30vh;
   width: 400px;
   word-break: break-word;
   border-radius: 6px;
