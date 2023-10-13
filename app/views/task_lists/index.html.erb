@@ -69,7 +69,7 @@
       <%= button_to "Destroy this task list", task_list, method: :delete, class:"btn btn-warning" %>
       </details>
     <% end %>
-      <%= link_to "Nova task list", new_task_list_path %>
+      <%= link_to "Nova task list", new_task_list_path, data:{ turbo_frame: 'modal'} %>
     </div>
 
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
