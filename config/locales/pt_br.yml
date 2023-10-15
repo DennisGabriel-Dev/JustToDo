@@ -1,0 +1,10 @@
+pt_br: 
+  hello: "Olá"
+  task_lists:
+    destroy:
+      success: "A lista de tarefas foi apagada com sucesso!"
+    create:
+      success: "A lista foi criada com sucesso!"
+  tasks:
+    create:
+      success: "A tarefa foi criada com sucesso!"

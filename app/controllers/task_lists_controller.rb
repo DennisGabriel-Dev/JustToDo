@@ -8,6 +8,7 @@ class TaskListsController < ApplicationController
 
   # GET /task_lists/1 or /task_lists/1.json
   def show
+    link_to 'task_lists/index'
   end
 
   # GET /task_lists/new
@@ -26,7 +27,7 @@ class TaskListsController < ApplicationController
 
     respond_to do |format|
       if @task_list.save
-        format.html { redirect_to task_list_url(@task_list), notice: "Task list was successfully created." }
+        format.html { redirect_to task_list_url(@task_list), notice: t('.success') }
         format.json { render :show, status: :created, location: @task_list }
       else
         format.html { render :new, status: :unprocessable_entity }
@@ -52,9 +53,9 @@ class TaskListsController < ApplicationController
   def destroy
     id_tl = :id
     @task_list.destroy
-
+    flash[:notice] = t('task_lists.destroy.success')
     respond_to do |format|
-      format.html { redirect_to task_lists_url, notice: "Task list was successfully destroyed." }
+      format.html { redirect_to task_lists_url}
       format.json { head :no_content }
     end
   end

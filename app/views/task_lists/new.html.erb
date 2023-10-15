@@ -1,16 +1,13 @@
-<div class="modal" id="modal"  data-target="#exampleModal" tabindex="-1" role="dialog">
-  <div class="modal-dialog" role="document">
+<div class="modal" id="modal"  data-target="#exampleModal">
+    <%= turbo_frame_tag "modal" do %>
     <div class="modal-content">
-        <%= turbo_frame_tag "modal" do %>
         <h1 class="modal-header">New task list</h1>
           <%= render "form", task_list: @task_list , class: "modal-body"%>
         <br>
-
         <div class="modal-footer">
           <%= link_to "Back to task lists", task_lists_path %>
         </div>
-        <% end %>
       </div>
+      <% end %>
     </div>
-  </div>
 </div>
