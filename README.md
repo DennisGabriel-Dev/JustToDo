@@ -9,9 +9,12 @@
 1. Clone this repository or download it:<br>
     ```git clone https://github.com/DennisGabriel-Dev/JustToDo.git```
 
-2. Enter the repository cloned:<br>
-    ```cd JustToDo```
-3. Enter in config/database.yml and configure with in your credentials
+2. Enter the repository cloned and run bundle:<br>
+    ```
+    cd JustToDo
+    bundle    
+   ```
+4. Enter in config/database.yml and configure with in your credentials
 only change this fields: <br>
 ```
 default: &default
