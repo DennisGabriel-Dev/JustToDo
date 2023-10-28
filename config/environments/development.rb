@@ -61,6 +61,7 @@ Rails.application.configure do
 
   config.action_view.cache_template_loading = false
 
+  config.action_controller.perform_caching = true
   # Raises error for missing translations.
   # config.i18n.raise_on_missing_translations = true
 
