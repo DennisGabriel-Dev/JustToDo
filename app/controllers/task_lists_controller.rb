@@ -8,7 +8,7 @@ class TaskListsController < ApplicationController
 
   # GET /task_lists/1 or /task_lists/1.json
   def show
-    link_to 'task_lists/index'
+    redirect_to '/task_lists'
   end
 
   # GET /task_lists/new

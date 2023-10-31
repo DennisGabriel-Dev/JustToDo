@@ -11260,14 +11260,3 @@ body {
   font-size: 0.75rem;
   border-radius: 0.375rem !important;
 }
-
-#modal {
-  position: absolute;
-  z-index: 2;
-  right: 50vw;
-  top: 30vh;
-  width: 400px;
-  word-break: break-word;
-  border-radius: 6px;
-  background: #bad5ff;
-}
