@@ -19,7 +19,7 @@ only change this fields: <br>
 ```
 default: &default
   ...
-  username: postgres   #your postgres' username
+  username: dennis   #your postgres' username
   password: root       #your postgres' password
   ...
 ```
