@@ -11,4 +11,8 @@
 class TaskList < ApplicationRecord
   belongs_to :user
   has_many :tasks,  dependent: :destroy
+
+  def self.ransackable_attributes(auth_object = nil)
+    ["name"]
+  end
 end

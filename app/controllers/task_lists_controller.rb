@@ -3,7 +3,8 @@ class TaskListsController < ApplicationController
 
   # GET /task_lists or /task_lists.json
   def index
-    @task_lists = TaskList.where(["user_id = ?",  current_user.id])
+    @q = TaskList.ransack(params[:q])
+    @task_lists = @q.result(distinct: true)
   end
 
   # GET /task_lists/1 or /task_lists/1.json
