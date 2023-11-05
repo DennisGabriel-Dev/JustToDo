@@ -7,8 +7,13 @@
 #  user_id    :bigint           not null
 #  created_at :datetime         not null
 #  updated_at :datetime         not null
+#  deleted_at :datetime
 #
 class TaskList < ApplicationRecord
+
+  # paranoia
+  acts_as_paranoid
+
   belongs_to :user
   has_many :tasks,  dependent: :destroy
 
