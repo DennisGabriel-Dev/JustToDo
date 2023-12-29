@@ -60,7 +60,7 @@
         </thead>
         <tbody>
           <% task_list.tasks.each do |task|%>
-            <% if not task.title.nil? %>
+            <% unless task.title.nil? %>
             <tr>
               <td class="col-3"><%= task.title %></td>
               <td class = "col-1"><%=  task.status%></td>

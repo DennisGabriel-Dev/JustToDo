@@ -4,7 +4,7 @@ class TaskListsController < ApplicationController
   # GET /task_lists or /task_lists.json
   def index
     @q = TaskList.ransack(params[:q])
-    @task_lists = @q.result(distinct: true)
+    @task_lists = @q.result(distinct: true).where(user_id: current_user.id)
   end
 
   # GET /task_lists/1 or /task_lists/1.json
@@ -69,6 +69,6 @@ class TaskListsController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def task_list_params
-      params.require(:task_list).permit(:name, :user_id)
+      params.require(:task_list).permit!
     end
 end
