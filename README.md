@@ -24,8 +24,8 @@ default: &default
   ...
 ```
 4. Create database and migrate data:<br>
-    ```$ rake db:create```<br>
-    ```$ rake db:migrate```<br>
+    ```$ rails db:create```<br>
+    ```$ rails db:migrate```<br>
     Enter in your PgAdmin4 to see the database flux <br>
     The name database created was: `just_to_do2`
 5. And Finally: <br>
