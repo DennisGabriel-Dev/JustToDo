@@ -5,9 +5,14 @@ pt_br:
       success: "A lista de tarefas foi apagada com sucesso!"
     create:
       success: "A lista foi criada com sucesso!"
+    form:
+      create: "Criar task list"
   tasks:
     create:
       success: "A tarefa foi criada com sucesso!"
+  attributes:
+    task_list:
+      name: "nome"
 
 # Additional translations at https://github.com/heartcombo/devise/wiki/I18n
   devise:

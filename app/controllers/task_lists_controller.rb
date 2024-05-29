@@ -52,7 +52,7 @@ class TaskListsController < ApplicationController
 
   # DELETE /task_lists/1 or /task_lists/1.json
   def destroy
-    id_tl = :id
+    set_task_list
     @task_list.destroy
     flash[:notice] = t('task_lists.destroy.success')
     respond_to do |format|

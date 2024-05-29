@@ -10,37 +10,7 @@
         <script src="https://use.fontawesome.com/releases/v6.3.0/js/all.js" crossorigin="anonymous"></script>
     </head>
 <body>
-    <header class="">
-        <nav class="sb-topnav navbar navbar-expand navbar-dark bg-dark">
-            <!-- Navbar Brand-->
-            <a class="navbar-brand ps-3" href="#">Just To Do </a>
-            <!-- Sidebar Toggle-->
-            <button class="btn btn-link btn-sm order-1 order-lg-0 me-4 me-lg-0" id="sidebarToggle" href="#!"><i class="fas fa-bars"></i></button>
-            <!-- Navbar Search-->
-            <form class="d-none d-md-inline-block form-inline ms-auto me-0 me-md-3 my-2 my-md-0">
-                <div class="input-group">
-
-
-                  <%= search_form_for @q do |f|%>
-                    <%= f.search_field :name_eq , class: "form-control", placeholder: "Task List..."%>
-                  <% end %>
-                    <button class="btn btn-primary" id="btnNavbarSearch" type="button"><i class="fas fa-search"></i></button>
-                </div>
-            </form>
-            <!-- Navbar-->
-            <ul class="navbar-nav ms-auto ms-md-0 me-3 me-lg-4">
-                <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" id="navbarDropdown" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false"><i class="fas fa-user fa-fw"></i></a>
-                    <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
-                        <li><a class="dropdown-item" href="#!">Settings</a></li>
-                        <li><a class="dropdown-item" href="#!">Activity Log</a></li>
-                        <li><hr class="dropdown-divider" /></li>
-                        <li><a class="dropdown-item" href="index.html.erb"><%=  button_to "logout", destroy_user_session_path, method: :delete , class: "dropdown-item"%></a></li>
-                    </ul>
-                </li>
-            </ul>
-        </nav>
-      </header>
+  <%= render "layouts/header"%>
   <main class = "container mt-5">
     <% if flash[:notice] %>
       <div class="<%= flash_class(:success)%>"><%= flash[:notice] %></div>
@@ -51,7 +21,7 @@
          
       <table class="table table-bordered table-striped table-covered " id="datatablesSimple">
         <thead>
-          <% if not task_list.tasks.empty? %>
+          <% if task_list.tasks.present? %>
             <th> Title </th>
             <th> Status </th>
             <th> Delete </th>
@@ -75,7 +45,9 @@
       <%= button_to "Destroy this task list", task_list, method: :delete, class:"btn btn-warning" %>
       </details>
     <% end %>
-      <%= link_to "Nova task list", new_task_list_path %>
+      <%= turbo_frame_tag "new_task_list" do %>
+        <%= link_to "Nova task list", new_task_list_path %>
+      <% end %>
     </div>
 
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
