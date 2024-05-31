@@ -16,6 +16,7 @@ class TaskList < ApplicationRecord
 
   belongs_to :user
   has_many :tasks,  dependent: :destroy
+  validates :name, presence: true, length: {minimum: 8, message: "Texto curto demais"}
 
   def self.ransackable_attributes(auth_object = nil)
     ["name"]

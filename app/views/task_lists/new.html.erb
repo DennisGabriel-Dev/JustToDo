@@ -1,13 +1,15 @@
 <%= turbo_frame_tag "new_task_list" do %>
   <div>
       <div>
-          <h1 id="new_task_list_title">New task list</h1>
-            <%= render "form", task_list: @task_list %>
-          <br>
-          <div>
-            <%= link_to "Back to task lists", task_lists_path %>
-          </div>
+        <h1><%= render 'utils/action_name'%>:
+          <span id="new_task_list_title"></span>
+        </h1>
+        <%= render "form", task_list: @task_list %>
+        <br>
+        <div>
+          <%= link_to "Back to task lists", task_lists_path %>
         </div>
       </div>
+    </div>
   </div>
 <% end %>

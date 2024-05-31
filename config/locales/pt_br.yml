@@ -13,6 +13,22 @@ pt_br:
   attributes:
     task_list:
       name: "nome"
+  actions:
+    create: Criar
+    new: Nova
+    edit: Editar
+    destroy: Deletar
+    update: Atualizar
+  models:
+    task_lists: Lista de tarefas
+    tasks: Tarefa
+  activerecord:
+    errors:
+      models:
+        task_list:
+          attributes: 
+            name: 
+              blank: Nome não pode ficar em branco
 
 # Additional translations at https://github.com/heartcombo/devise/wiki/I18n
   devise:
