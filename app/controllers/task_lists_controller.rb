@@ -30,6 +30,7 @@ class TaskListsController < ApplicationController
       if @task_list.save
         format.html { redirect_to task_list_url(@task_list), notice: t('.success') }
         format.json { render :show, status: :created, location: @task_list }
+        format.turbo_stream
       else
         format.html { render :new, status: :unprocessable_entity }
         format.json { render json: @task_list.errors, status: :unprocessable_entity }

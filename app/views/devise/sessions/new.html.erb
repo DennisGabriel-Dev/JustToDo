@@ -1,0 +1,41 @@
+<body class="bg-primary container">
+  <div id="layoutAuthentication"><div id="layoutAuthentication_content">
+      <main>
+          <div class="container">
+              <div class="row justify-content-center">
+                  <div class="col-lg-5">
+                      <div class="card shadow-lg border-0 rounded-lg mt-5">
+                          <div class="card-header"><h3 class="text-center font-weight-light my-4">Sign in</h3></div>
+                            <div class="card-body">
+                              <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
+                                <div class="field">
+                                  <%= f.label :email %><br />
+                                  <%= f.email_field :email, autofocus: true, autocomplete: "email", class:"form-control form-floating mb-3" %>
+                                </div>
+
+                                <div class="field">
+                                  <%= f.label :password %><br />
+                                  <%= f.password_field :password, autocomplete: "current-password", class:"form-control form-floating mb-3" %>
+                                </div>
+
+                                <% if devise_mapping.rememberable? %>
+                                  <div class="field">
+                                    <%= f.check_box :remember_me %>
+                                    <%= f.label :remember_me %>
+                                  </div>
+                                <% end %>
+
+                                <div class="actions">
+                                  <%= f.submit "Log in", class: "btn btn-primary actions" %>
+                                </div>
+                              <% end %>
+
+                              <%= render "devise/shared/links" %>
+                            </div>
+                      </div>
+                  </div>
+              </div>
+          </div>
+      </main>
+  </div>
+</body>
