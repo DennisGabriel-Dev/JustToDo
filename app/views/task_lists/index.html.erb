@@ -7,7 +7,7 @@
     <div id="task_lists">
       <% @task_lists.each do |task_list| %>
         <details>
-         <summary><%= render task_list %></summary>
+         <%= render task_list %>
         <table class="table table-bordered table-striped table-covered " id="datatablesSimple">
           <thead>
             <% if task_list.tasks.present? %>

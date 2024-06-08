@@ -4,7 +4,7 @@ class TasksController < ApplicationController
   # GET /tasks or /tasks.json
   def index
     respond_to do |format|
-      format.html {redirect_to root_path, notice: 'Rota não existente'}
+      format.html {redirect_to "/500", notice: 'Rota não existente'}
     end
   end
 
