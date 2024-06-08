@@ -3,7 +3,7 @@
 * Rails version -> 7.0.8
 
 ## In this project I use database:
-* PostgreSQL and PgAdmin4
+* PostgreSQL, Hotwire Framework in addition to Ruby on Rails
 
 ## For execute this project:
 1. Clone this repository or download it:<br>
@@ -26,7 +26,7 @@ default: &default
 4. Create database and migrate data:<br>
     ```$ rails db:create```<br>
     ```$ rails db:migrate```<br>
-    Enter in your PgAdmin4 to see the database flux <br>
+    Enter in your PostgreSQL database to see the database flux <br>
     The name database created was: `just_to_do2`
 5. And Finally: <br>
   ```$ rails s```
