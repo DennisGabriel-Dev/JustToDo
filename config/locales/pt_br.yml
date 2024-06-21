@@ -6,7 +6,7 @@ pt_br:
     create:
       success: "A lista foi criada com sucesso!"
     form:
-      create: "Criar task list"
+      create: "Criar"
   tasks:
     create:
       success: "A tarefa foi criada com sucesso!"

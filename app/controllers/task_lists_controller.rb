@@ -1,16 +1,14 @@
 class TaskListsController < ApplicationController
-  before_action :set_task_list, only: %i[ show edit update destroy ]
+  before_action :set_task_list, only: %i[show edit update destroy]
 
   # GET /task_lists or /task_lists.json
   def index
     @q = TaskList.ransack(params[:q])
-    @task_lists = @q.result(distinct: true).where(user_id: current_user.id)
+    @task_lists = @q.result(distinct: true).where(user_id: current_user.id).ordered
   end
 
   # GET /task_lists/1 or /task_lists/1.json
-  def show
-    redirect_to '/task_lists'
-  end
+  def show; end
 
   # GET /task_lists/new
   def new
@@ -18,8 +16,7 @@ class TaskListsController < ApplicationController
   end
 
   # GET /task_lists/1/edit
-  def edit
-  end
+  def edit; end
 
   # POST /task_lists or /task_lists.json
   def create
@@ -42,7 +39,7 @@ class TaskListsController < ApplicationController
   def update
     respond_to do |format|
       if @task_list.update(task_list_params)
-        format.html { redirect_to task_list_url(@task_list), notice: "Task list was successfully updated." }
+        format.html { redirect_to task_list_url(@task_list), notice: 'Task list was successfully updated.' }
         format.json { render :show, status: :ok, location: @task_list }
       else
         format.html { render :edit, status: :unprocessable_entity }
@@ -57,19 +54,20 @@ class TaskListsController < ApplicationController
     @task_list.destroy
     flash[:notice] = t('task_lists.destroy.success')
     respond_to do |format|
-      format.html { redirect_to task_lists_url}
+      format.html { redirect_to task_lists_url }
       format.json { head :no_content }
     end
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_task_list
-      @task_list = TaskList.find(params[:id])
-    end
 
-    # Only allow a list of trusted parameters through.
-    def task_list_params
-      params.require(:task_list).permit!
-    end
+  # Use callbacks to share common setup or constraints between actions.
+  def set_task_list
+    @task_list = TaskList.find(params[:id])
+  end
+
+  # Only allow a list of trusted parameters through.
+  def task_list_params
+    params.require(:task_list).permit!
+  end
 end

@@ -71,6 +71,7 @@ GEM
     annotate (3.2.0)
       activerecord (>= 3.2, < 8.0)
       rake (>= 10.4, < 14.0)
+    ast (2.4.2)
     bcrypt (3.1.19)
     bindex (0.8.1)
     bootsnap (1.16.0)
@@ -113,6 +114,9 @@ GEM
     jbuilder (2.11.5)
       actionview (>= 5.0.0)
       activesupport (>= 5.0.0)
+    json (2.7.2)
+    language_server-protocol (3.17.0.3)
+    logger (1.6.0)
     loofah (2.21.3)
       crass (~> 1.0.2)
       nokogiri (>= 1.12.0)
@@ -142,10 +146,15 @@ GEM
     nokogiri (1.15.4-x86_64-linux)
       racc (~> 1.4)
     orm_adapter (0.5.0)
+    parallel (1.25.1)
     paranoia (2.6.3)
       activerecord (>= 5.1, < 7.2)
+    parser (3.3.3.0)
+      ast (~> 2.4.1)
+      racc
     pg (1.5.4)
     pg (1.5.4-x64-mingw-ucrt)
+    prism (0.30.0)
     psych (5.1.0)
       stringio
     public_suffix (5.0.3)
@@ -186,11 +195,14 @@ GEM
       rake (>= 12.2)
       thor (~> 1.0)
       zeitwerk (~> 2.5)
+    rainbow (3.1.1)
     rake (13.0.6)
     ransack (4.1.1)
       activerecord (>= 6.1.5)
       activesupport (>= 6.1.5)
       i18n
+    rbs (3.5.1)
+      logger
     rdoc (6.5.0)
       psych (>= 4.0.0)
     regexp_parser (2.8.1)
@@ -221,11 +233,42 @@ GEM
       rspec-mocks (~> 3.12)
       rspec-support (~> 3.12)
     rspec-support (3.12.1)
+    rubocop (1.64.1)
+      json (~> 2.3)
+      language_server-protocol (>= 3.17.0)
+      parallel (~> 1.10)
+      parser (>= 3.3.0.2)
+      rainbow (>= 2.2.2, < 4.0)
+      regexp_parser (>= 1.8, < 3.0)
+      rexml (>= 3.2.5, < 4.0)
+      rubocop-ast (>= 1.31.1, < 2.0)
+      ruby-progressbar (~> 1.7)
+      unicode-display_width (>= 2.4.0, < 3.0)
+    rubocop-ast (1.31.3)
+      parser (>= 3.3.1.0)
+    rubocop-packaging (0.5.2)
+      rubocop (>= 1.33, < 2.0)
+    rubocop-performance (1.21.1)
+      rubocop (>= 1.48.1, < 2.0)
+      rubocop-ast (>= 1.31.1, < 2.0)
+    rubocop-rspec (3.0.1)
+      rubocop (~> 1.61)
+    rubocop-shopify (2.15.1)
+      rubocop (~> 1.51)
+    rubocop-thread_safety (0.5.1)
+      rubocop (>= 0.90.0)
+    ruby-lsp (0.17.4)
+      language_server-protocol (~> 3.17.0)
+      prism (>= 0.29.0, < 0.31)
+      rbs (>= 3, < 4)
+      sorbet-runtime (>= 0.5.10782)
+    ruby-progressbar (1.13.0)
     rubyzip (2.3.2)
     selenium-webdriver (4.12.0)
       rexml (~> 3.2, >= 3.2.5)
       rubyzip (>= 1.2.2, < 3.0)
       websocket (~> 1.0)
+    sorbet-runtime (0.5.11435)
     sprockets (4.2.1)
       concurrent-ruby (~> 1.0)
       rack (>= 2.2.4, < 4)
@@ -246,6 +289,7 @@ GEM
       concurrent-ruby (~> 1.0)
     tzinfo-data (1.2023.3)
       tzinfo (>= 1.0.0)
+    unicode-display_width (2.5.0)
     warden (1.2.9)
       rack (>= 2.0.9)
     web-console (4.2.1)
@@ -281,6 +325,13 @@ DEPENDENCIES
   ransack
   rspec
   rspec-rails
+  rubocop
+  rubocop-packaging
+  rubocop-performance
+  rubocop-rspec
+  rubocop-shopify
+  rubocop-thread_safety
+  ruby-lsp
   selenium-webdriver
   sprockets-rails
   stimulus-rails

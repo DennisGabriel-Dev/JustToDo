@@ -10,15 +10,15 @@
 #  deleted_at :datetime
 #
 class TaskList < ApplicationRecord
-
   # paranoia
   acts_as_paranoid
+  scope :ordered, -> { order(id: :desc) }
 
   belongs_to :user
-  has_many :tasks,  dependent: :destroy
-  validates :name, presence: true, length: {minimum: 8, message: "Texto curto demais"}
+  has_many :tasks, dependent: :destroy
+  validates :name, presence: true, length: { minimum: 8, message: 'Texto curto demais' }
 
   def self.ransackable_attributes(auth_object = nil)
-    ["name"]
+    ['name']
   end
 end

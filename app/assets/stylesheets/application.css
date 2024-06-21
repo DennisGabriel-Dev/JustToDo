@@ -1,0 +1,67 @@
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap");
+:root {
+	--vs-primary: 29 92 255;
+}
+
+.modal-custom{
+  padding: 1rem 3rem;
+	background: white;
+	max-width: 400px;
+	padding-top: 2rem;
+	border-radius: 20px;
+	border: 0;
+	box-shadow: 0 5px 30px 0 rgb(0 0 0 / 10%);
+	animation: fadeIn 1s ease both;
+}
+
+.modal-custom::backdrop{
+	animation: fadeIn 1s ease both;
+	background: rgb(255 255 255 / 40%);
+	z-index: 2;
+	backdrop-filter: blur(20px);
+}
+
+.modal-custom:hover{
+  filter: grayscale(0);
+  transform: scale(1.1);
+}
+
+#new_task_list_title{
+  color: rgb(68, 62, 223);
+}
+
+.animation_new_task{
+  background-color: black;
+  transition: all 1s ease-out;
+}
+
+
+.button__new_task_list{
+  display: inline-block;
+	font-size: 0.8rem;
+	color: #fff !important;
+	background: #3c81ff;
+	padding: 13px 25px;
+	border-radius: 17px;
+	transition: background-color 0.1s ease;
+	box-sizing: border-box;
+	transition: all 0.25s ease;
+	border: 0;
+	cursor: pointer;
+	box-shadow: 0 10px 20px -10px rgb(var(--vs-primary) / 50%);
+}
+
+.button__new_task_list:hover{
+  box-shadow: 0 20px 20px -10px rgb(var(--vs-primary) / 50%);
+	transform: translateY(-5px);
+  background-color: rgb(var(--vs-primary) / 100%);
+}
+
+@keyframes fadeIn {
+	from {
+		opacity: 0;
+	}
+	to {
+		opacity: 1;
+	}
+}

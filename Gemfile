@@ -80,5 +80,11 @@ group :test do
   # Use system testing [https://guides.rubyonrails.org/testing.html#system-testing]
   gem "capybara"
   gem "selenium-webdriver"
-
+  gem "ruby-lsp"
+  gem "rubocop"
+  gem "rubocop-packaging"
+  gem "rubocop-performance"
+  gem "rubocop-rspec"
+  gem "rubocop-shopify"
+  gem "rubocop-thread_safety"
 end
