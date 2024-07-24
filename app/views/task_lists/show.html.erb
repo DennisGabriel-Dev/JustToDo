@@ -1,10 +1,22 @@
-<div class="" id="task_lists">
-  <%= render @task_list %>
-</div>
+ <div class="" id="task_lists">
+  <h2><%= @task_list.name %></h2>
+  <div>
+   <%= "<h3>Tasks<h3>".html_safe if @task_list.tasks.present? %>
+   <% @task_list.tasks.each_with_index do |task, index| %>
+    <h4>
+      <%= index + 1 %>
+      <b><%= task&.title %></b>
+    </h4>
+   <% end %>
+    <%= turbo_frame_tag "new_task" do %>
+      <%= link_to 'New Task',new_task_path(task_list_id: @task_list) %>
+    <% end %>
+  </div>
 
-<div>
-  <%= link_to "Edit this task list", edit_task_list_path(@task_list) %> |
-  <%= link_to "Back to task lists", task_lists_path %>
+  <div>
+    <%= link_to "Edit this task list", edit_task_list_path(@task_list) %> |
+    <%= link_to "Back to task lists", task_lists_path %>
 
-  <%= button_to "Destroy this task list", @task_list, method: :delete %>
+    <%= button_to "Destroy this task list", @task_list, method: :delete %>
+  </div>
 </div>

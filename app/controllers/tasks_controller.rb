@@ -1,10 +1,10 @@
 class TasksController < ApplicationController
-  before_action :set_task, only: %i[ show edit update destroy ]
+  before_action :set_task, only: %i[show edit update destroy]
 
   # GET /tasks or /tasks.json
   def index
     respond_to do |format|
-      format.html {redirect_to "/500", notice: 'Rota não existente'}
+      format.html { redirect_to "/500", notice: "Rota não existente" }
     end
   end
 
@@ -14,6 +14,7 @@ class TasksController < ApplicationController
 
   # GET /tasks/new
   def new
+    @task_list_id = params[:task_list_id]
     @task = Task.new
   end
 
@@ -24,10 +25,9 @@ class TasksController < ApplicationController
   # POST /tasks or /tasks.json
   def create
     @task = Task.new(task_params)
-    @task_list = TaskList.where("id = ?", @task.task_list_id).first
     respond_to do |format|
       if @task.save
-        format.html { redirect_to root_path, notice: t('.success') }
+        format.html { redirect_to root_path, notice: t(".success") }
         format.json { render :show, status: :created, location: @task }
       else
         format.html { render :new, status: :unprocessable_entity }
@@ -59,13 +59,14 @@ class TasksController < ApplicationController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_task
-      @task = Task.find(params[:id])
-    end
 
-    # Only allow a list of trusted parameters through.
-    def task_params
-      params.require(:task).permit(:title, :status, :task_list_id)
-    end
+  # Use callbacks to share common setup or constraints between actions.
+  def set_task
+    @task = Task.find(params[:id])
+  end
+
+  # Only allow a list of trusted parameters through.
+  def task_params
+    params.require(:task).permit(:title, :status, :task_list_id)
+  end
 end

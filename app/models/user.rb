@@ -22,10 +22,8 @@ class User < ApplicationRecord
   validate :password_validate
 
   def password_validate
-    unless password =~ /^(?=.*[A-Za-z])(?=.*\d).{8,}$/
-        errors.add :password, "A senha deve conter pelo menos um número e ter no mínimo 8 caracteres"
-        # Somente para testar no console
-        puts "A senha deve conter pelo menos um número e ter no mínimo 8 caracteres"
-    end
+    return if password =~ /^(?=.*[A-Za-z])(?=.*\d).{8,}$/
+
+    errors.add :password, 'A senha deve conter pelo menos um número e ter no mínimo 8 caracteres'
   end
 end
