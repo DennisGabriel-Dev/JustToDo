@@ -29,6 +29,7 @@ class TasksController < ApplicationController
       if @task.save
         format.html { redirect_to root_path, notice: t(".success") }
         format.json { render :show, status: :created, location: @task }
+        format.turbo_stream
       else
         format.html { render :new, status: :unprocessable_entity }
         format.json { render json: @task.errors, status: :unprocessable_entity }

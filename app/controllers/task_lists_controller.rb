@@ -40,6 +40,7 @@ class TaskListsController < ApplicationController
       if @task_list.update(task_list_params)
         format.html { redirect_to task_list_url(@task_list), notice: 'Task list was successfully updated.' }
         format.json { render :show, status: :ok, location: @task_list }
+        format.turbo_stream
       else
         format.html { render :edit, status: :unprocessable_entity }
         format.json { render json: @task_list.errors, status: :unprocessable_entity }

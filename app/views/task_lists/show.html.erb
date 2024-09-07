@@ -1,12 +1,8 @@
- <div class="" id="task_lists">
+ <div>
   <h2><%= @task_list.name %></h2>
-  <div>
-   <%= "<h3>Tasks<h3>".html_safe if @task_list.tasks.present? %>
+  <div class="tasks" id="tasks">
    <% @task_list.tasks.each_with_index do |task, index| %>
-    <h4>
-      <%= index + 1 %>
-      <b><%= task&.title %></b>
-    </h4>
+    <%= render "tasks/task", task:  %>
    <% end %>
     <%= turbo_frame_tag "new_task" do %>
       <%= link_to 'New Task',new_task_path(task_list_id: @task_list) %>
