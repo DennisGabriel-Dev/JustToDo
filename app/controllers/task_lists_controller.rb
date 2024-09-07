@@ -22,7 +22,6 @@ class TaskListsController < ApplicationController
   def create
     @task_list = TaskList.new(task_list_params)
     @task_list.user_id = current_user.id
-
     respond_to do |format|
       if @task_list.save
         format.html { redirect_to task_list_url(@task_list), notice: t('.success') }
