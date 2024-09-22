@@ -4,11 +4,8 @@
     <% @task_list.tasks.each_with_index do |task, index| %>
       <%= render "tasks/task", task: , class_personalized: 'task-list__task'%>
     <% end %>
-    <%= turbo_frame_tag "new_task" do %>
-      <%= link_to 'New Task',new_task_path(task_list_id: @task_list) %>
-    <% end %>
+    <%= link_to 'New Task',new_task_path(task_list_id: @task_list), data: {turbo_frame: "new_task"} %>
   </div>
-
   <div>
     <%= link_to "Edit this task list", edit_task_list_path(@task_list) %> |
     <%= link_to "Back to task lists", task_lists_path %>
@@ -16,3 +13,4 @@
     <%= button_to "Destroy this task list", @task_list, method: :delete, data: {turbo_confirm: 'Quer mesmo fazer isso?'} %>
   </div>
 </div>
+<%= turbo_frame_tag "new_task"%>

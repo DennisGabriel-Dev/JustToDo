@@ -1,13 +1,15 @@
 <%= turbo_frame_tag "new_task" do %>
-  <div class="modal-custom">
-    <h1><%= render "utils/action_name"%></h1>
-
-    <%= render "form", task: @task %>
-
-    <br>
-
-    <div>
-      <%= link_to "Back to tasks", task_lists_path(@task.task_list) %>
+  <div class="pop-up">
+    <div class="overlay"></div>
+    <div class="modal-custom">
+      <div class="position-relative">
+        <h1><%= render "utils/action_name"%></h1>
+        <%= render "form", task: @task %>
+        <br>
+        <div>
+          <%= link_to "Back to tasks", task_lists_path(@task.task_list) %>
+        </div>
+      </div>
     </div>
   </div>
 <% end %>
