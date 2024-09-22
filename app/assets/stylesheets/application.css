@@ -5,25 +5,32 @@
 
 .modal-custom{
   padding: 1rem 3rem;
-	background: white;
-	max-width: 400px;
+	background: #f7f7f7;
 	padding-top: 2rem;
 	border-radius: 20px;
 	border: 0;
 	box-shadow: 0 5px 30px 0 rgb(0 0 0 / 10%);
 	animation: fadeIn 1s ease both;
+  position: absolute;
+  z-index: 2;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.pop-up .overlay{
+  position: fixed;
+  top: 0px;
+  left: 0px;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(0, 0, 0, 0.7);
 }
 
 .modal-custom::backdrop{
 	animation: fadeIn 1s ease both;
 	background: rgb(255 255 255 / 40%);
 	z-index: 2;
-	backdrop-filter: blur(20px);
-}
-
-.modal-custom:hover{
-  filter: grayscale(0);
-  transform: scale(1.1);
 }
 
 #new_task_list_title{
