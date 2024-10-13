@@ -1,9 +1,14 @@
 <div class="list-group animation_new_task">
-  <div class="list-group-item list-group-item-action d-flex flex-row  justify-content-between gap-3 py-3">
+  <div class="list-group-item list-group-item-action d-flex flex-row justify-content-between gap-3 mb-3">
     <div>
       <%= render "utils/hash" %>
       <%= link_to task_list.name , task_list_path(task_list), class: '' %>
     </div>
-    <p class="d-flex "><%#= task_list.tasks.count %></p>
+    <div class="text-end d-flex">
+       <%= link_to pencil_icon,
+        edit_task_list_path(task_list), class: 'btn', data: {turbo_frame: "new_task_list"}%>
+      <%= button_to trash_icon,
+        task_list_path(task_list), method: :delete, data: {turbo_confirm: 'Quer mesmo fazer isso?'}, class: 'btn'%>
+    </div>
   </div>
 </div>

@@ -38,7 +38,6 @@
 }
 
 .animation_new_task{
-  background-color: black;
   transition: all 1s ease-out;
 }
 
@@ -72,3 +71,5 @@
 		opacity: 1;
 	}
 }
+
+
