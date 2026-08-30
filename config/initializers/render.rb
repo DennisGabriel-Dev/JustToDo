@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 if Rails.env.production? && ENV["RENDER_EXTERNAL_URL"].present?
   uri = URI.parse(ENV["RENDER_EXTERNAL_URL"])
 
