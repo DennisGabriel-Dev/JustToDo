@@ -7,7 +7,7 @@ class TaskListsController < ApplicationController
   end
 
   def show
-    @filter = params[:filter].presence_in(%w[all pending done]) || 'all'
+    @filter = params[:filter].presence_in(%w[all pending done due_today]) || 'all'
     @tasks = filtered_tasks
   end
 
@@ -75,6 +75,7 @@ class TaskListsController < ApplicationController
     case @filter
     when 'pending' then tasks.pending
     when 'done' then tasks.done
+    when 'due_today' then tasks.pending.due_today
     else tasks
     end
   end

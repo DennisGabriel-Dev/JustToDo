@@ -28,6 +28,7 @@
     <%= link_to "Todas", task_list_path(@task_list, filter: "all"), class: task_filter_class(@filter, "all") %>
     <%= link_to "Pendentes", task_list_path(@task_list, filter: "pending"), class: task_filter_class(@filter, "pending") %>
     <%= link_to "Concluídas", task_list_path(@task_list, filter: "done"), class: task_filter_class(@filter, "done") %>
+    <%= link_to "Vence hoje", task_list_path(@task_list, filter: "due_today"), class: task_filter_class(@filter, "due_today") %>
   </div>
 
   <div class="task-rows"

@@ -26,7 +26,20 @@ module ApplicationHelper
     case filter
     when "pending" then "Nenhuma tarefa pendente."
     when "done" then "Nenhuma tarefa concluída ainda."
+    when "due_today" then "Nenhuma tarefa vence hoje."
     else "Nenhuma tarefa ainda. Crie a primeira!"
+    end
+  end
+
+  def task_due_label(task)
+    return if task.due_at.blank? || task.status?
+
+    if task.overdue?
+      { class: "task-row__due--overdue", label: "Atrasada" }
+    elsif task.due_today?
+      { class: "task-row__due--today", label: "Hoje" }
+    else
+      { class: "task-row__due--future", label: task.due_at.strftime("%d/%m") }
     end
   end
 end

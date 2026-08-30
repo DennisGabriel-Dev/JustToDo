@@ -18,6 +18,9 @@
     <% end %>
   <% end %>
   <span class="task-row__title"><%= task.title %></span>
+  <% if (due = task_due_label(task)) %>
+    <span class="task-row__due <%= due[:class] %>"><%= due[:label] %></span>
+  <% end %>
   <span class="task-row__badge <%= task.status ? 'task-row__badge--done' : 'task-row__badge--pending' %>">
     <%= task.status ? 'Feito' : 'Pendente' %>
   </span>
