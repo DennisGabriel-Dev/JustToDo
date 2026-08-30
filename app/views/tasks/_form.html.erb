@@ -1,4 +1,4 @@
-<%= form_with(model: task) do |form| %>
+<%= form_with(model: task, data: { turbo_frame: "_top" }) do |form| %>
   <% if task.errors.any? %>
     <ul class="form-errors">
       <% task.errors.each do |error| %>

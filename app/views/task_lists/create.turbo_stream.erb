@@ -1,1 +1,9 @@
-<%= turbo_stream.prepend("task_list", @task_list)%>
+<%= turbo_stream.update "new_task_list", "" %>
+
+<%= turbo_stream.remove "lists_empty" %>
+<%= turbo_stream.prepend "lists_grid" do %>
+  <%= render "task_list", task_list: @task_list, just_created: true %>
+<% end %>
+<%= turbo_stream.update "lists_subtitle" do %>
+  <%= @lists_count %> <%= @lists_count == 1 ? 'lista' : 'listas' %>
+<% end %>

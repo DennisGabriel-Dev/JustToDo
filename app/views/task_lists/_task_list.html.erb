@@ -1,6 +1,6 @@
 <% progress = task_list_progress(task_list) %>
 
-<article class="list-card" id="<%= dom_id(task_list) %>">
+<article class="list-card <%= 'list-card--pop' if local_assigns[:just_created] %>" id="<%= dom_id(task_list) %>">
   <div class="list-card__header">
     <%= link_to task_list.name, task_list_path(task_list), class: "list-card__name" %>
     <div class="list-card__actions">

@@ -33,8 +33,10 @@ class TasksController < ApplicationController
         format.json { render :show, status: :created, location: @task }
         format.turbo_stream
       else
+        @task_list_id = task_params[:task_list_id]
         format.html { render :new, status: :unprocessable_entity }
         format.json { render json: @task.errors, status: :unprocessable_entity }
+        format.turbo_stream { render :new, status: :unprocessable_entity }
       end
     end
   end
