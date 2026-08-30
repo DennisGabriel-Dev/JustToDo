@@ -6,13 +6,14 @@
         <% end %>
       </ul>
   <% end %>
-  <div class="d-flex flex-column flex-md-row p-4 gap-4 py-md-5 align-items-center justify-content-center input-group">
+  <div class="d-flex flex-column flex-md-row p-4 gap-4 py-md-5 align-items-center 
+            justify-content-center input-group" data-controller="modal">
     <%= form.text_field :name, 
         placeholder: I18n.t('attributes.task_list.name'), 
         data: {action: "input->custom#update_hint", 
         custom_target: "nameTaskList"},
         class: 'form-control' %>
     <h3 id="new_task_list_title"></h3>
-    <%= form.submit (I18n.t('task_lists.form.create')) , class: 'btn btn-info rounded' %>
+    <%= form.submit (I18n.t("task_lists.form.create")) , class: 'btn btn-info rounded', data: { action: "modal#clickModal"} %>
   </div>
 <% end %>
