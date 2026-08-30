@@ -10,7 +10,7 @@ gem 'rails', '~> 7.1.4'
 gem 'sprockets-rails'
 
 # Use the Puma web server [https://github.com/puma/puma]
-gem 'puma', '~> 5.0'
+gem 'puma', '~> 6.0'
 
 # Use JavaScript with ESM import maps [https://github.com/rails/importmap-rails]
 gem 'importmap-rails'
@@ -47,11 +47,6 @@ gem 'bootsnap', require: false
 
 gem 'devise'
 
-gem 'annotate'
-
-gem 'rspec'
-gem 'rspec-rails'
-
 gem 'pg'
 
 gem 'rails-i18n', '~> 7.0.0'
@@ -61,11 +56,13 @@ gem 'ransack'
 gem 'paranoia', '~> 2.2'
 
 group :development, :test do
+  gem 'rspec-rails'
   # See https://guides.rubyonrails.org/debugging_rails_applications.html#debugging-with-the-debug-gem
   gem 'debug', platforms: %i[mri mingw x64_mingw]
 end
 
 group :development do
+  gem 'annotate'
   # Use console on exceptions pages [https://github.com/rails/web-console]
   gem 'pry-rails'
   gem 'web-console'

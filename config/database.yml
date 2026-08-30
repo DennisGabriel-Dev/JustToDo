@@ -14,3 +14,7 @@ development:
 test:
   <<: *default
   database: just_to_do2_test
+
+production:
+  <<: *default
+  url: <%= ENV["DATABASE_URL"] %>

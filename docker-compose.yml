@@ -16,7 +16,9 @@ services:
       retries: 10
 
   web:
-    build: .
+    build:
+      context: .
+      target: development
     entrypoint: ["bash", "bin/docker-entrypoint"]
     command: ["bundle", "exec", "rails", "server", "-b", "0.0.0.0", "-p", "3000"]
     volumes:

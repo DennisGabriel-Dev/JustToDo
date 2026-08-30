@@ -52,3 +52,33 @@ docker compose exec web bundle exec rubocop --parallel
 docker compose exec -e RAILS_ENV=test web bundle exec rails db:prepare
 docker compose exec -e RAILS_ENV=test web bundle exec rspec
 ```
+
+## Deploy no Render
+
+O projeto inclui um [Blueprint](https://render.com/docs/blueprint-spec) em [`render.yaml`](render.yaml) com:
+
+- **Web Service** (Docker, stage `production` do Dockerfile)
+- **PostgreSQL** (plano free)
+
+### Passo a passo
+
+1. Faça push do repositório para o GitHub.
+2. No [Render Dashboard](https://dashboard.render.com/) → **New** → **Blueprint** → conecte o repo.
+3. Ao criar, informe manualmente a variável **`RAILS_MASTER_KEY`** (conteúdo de `config/master.key` local).
+4. Aguarde o primeiro deploy. O entrypoint roda `db:prepare` automaticamente.
+5. (Opcional) Para popular dados demo no primeiro deploy, adicione `RUN_SEEDS=true` nas env vars do serviço e redeploy. Depois pode remover.
+
+Login demo (se rodou seed): `demo@justtodo.dev` / `Demo1234`
+
+### Variáveis de ambiente (produção)
+
+| Variável | Origem |
+|---|---|
+| `DATABASE_URL` | Postgres no Render (automático via Blueprint) |
+| `SECRET_KEY_BASE` | Gerada pelo Render (automático) |
+| `RAILS_MASTER_KEY` | Você informa manualmente |
+| `RAILS_SERVE_STATIC_FILES` | `true` (no Blueprint) |
+| `RAILS_LOG_TO_STDOUT` | `true` (no Blueprint) |
+| `RUN_SEEDS` | `true` só no primeiro deploy (opcional) |
+
+O Render expõe `RENDER_EXTERNAL_URL`; o app usa isso para HTTPS e URLs do Devise.
