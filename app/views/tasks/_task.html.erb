@@ -19,7 +19,9 @@
   <% end %>
   <span class="task-row__priority <%= task_priority_class(task.priority) %>" title="<%= task_priority_label(task.priority) %>"></span>
   <div class="task-row__main">
-    <span class="task-row__title"><%= task.title %></span>
+    <%= link_to task.title, edit_task_path(task),
+        class: "task-row__title",
+        data: { turbo_frame: "new_task" } %>
     <% if task.tag_list.any? %>
       <div class="task-row__tags">
         <% task.tag_list.each do |tag| %>

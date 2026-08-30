@@ -693,8 +693,15 @@ a:hover { color: var(--primary-hover); }
   flex: 1;
   font-size: 14px;
   font-weight: 500;
+  color: var(--text);
+  text-decoration: none;
   transition: color 0.25s, opacity 0.25s;
   word-break: break-word;
+  cursor: pointer;
+}
+
+.task-row__title:hover {
+  color: var(--primary);
 }
 
 .task-row__main {
