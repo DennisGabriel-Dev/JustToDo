@@ -1,6 +1,14 @@
 <!DOCTYPE html>
-<html lang="pt-BR">
+<html lang="pt-BR" data-controller="theme">
   <head>
+    <script>
+      (function () {
+        var theme = localStorage.getItem("theme");
+        if (!theme && window.matchMedia("(prefers-color-scheme: dark)").matches) theme = "dark";
+        if (!theme) theme = "light";
+        document.documentElement.setAttribute("data-theme", theme);
+      })();
+    </script>
     <title>JustToDo</title>
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <%= csrf_meta_tags %>
@@ -22,6 +30,9 @@
         </div>
       </div>
     <% else %>
+      <button type="button" class="auth-theme-toggle" data-action="theme#toggle" aria-label="Alternar tema">
+        <i class="fas fa-moon" data-theme-target="icon"></i>
+      </button>
       <%= yield %>
     <% end %>
   </body>

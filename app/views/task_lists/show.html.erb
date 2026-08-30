@@ -10,7 +10,7 @@
   <div class="task-board__header">
     <div>
       <h2 class="task-board__title"><%= @task_list.name %></h2>
-      <p class="task-board__stats"><%= progress[:done] %> de <%= progress[:total] %> concluídas · <%= progress[:percent] %>%</p>
+      <p class="task-board__stats" id="task_list_stats"><%= progress[:done] %> de <%= progress[:total] %> concluídas · <%= progress[:percent] %>%</p>
     </div>
     <div class="task-board__toolbar">
       <%= link_to edit_task_list_path(@task_list), class: "btn btn--ghost", data: { turbo_frame: "new_task_list" } do %>
@@ -28,7 +28,7 @@
         <%= render "tasks/task", task: task %>
       <% end %>
     <% else %>
-      <div class="task-board__empty">
+      <div class="task-board__empty" id="tasks_empty">
         <i class="fas fa-clipboard-list"></i>
         <p>Nenhuma tarefa ainda. Crie a primeira!</p>
       </div>
@@ -43,3 +43,4 @@
 
 <%= turbo_frame_tag "new_task_list" %>
 <%= turbo_frame_tag "new_task" %>
+<div id="effects" aria-hidden="true"></div>

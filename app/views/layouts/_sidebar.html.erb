@@ -13,6 +13,10 @@
 
   <div class="sidebar__footer">
     <div class="sidebar__user"><%= current_user.email %></div>
+    <button type="button" class="sidebar__theme" data-action="theme#toggle">
+      <i class="fas fa-moon" data-theme-target="icon"></i>
+      <span data-theme-target="label">Modo escuro</span>
+    </button>
     <%= button_to destroy_user_session_path, method: :delete, class: "sidebar__logout" do %>
       <i class="fas fa-right-from-bracket"></i>
       Sair

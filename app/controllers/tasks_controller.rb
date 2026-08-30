@@ -1,5 +1,5 @@
 class TasksController < ApplicationController
-  before_action :set_task, only: %i[show edit update destroy]
+  before_action :set_task, only: %i[show edit update destroy toggle]
 
   # GET /tasks or /tasks.json
   def index
@@ -27,7 +27,9 @@ class TasksController < ApplicationController
     @task = Task.new(task_params)
     respond_to do |format|
       if @task.save
-        format.html { redirect_to root_path, notice: t(".success") }
+        @task_list = @task.task_list
+        @all_complete = @task_list.tasks.any? && @task_list.tasks.all?(&:status)
+        format.html { redirect_to task_list_path(@task_list), notice: t(".success") }
         format.json { render :show, status: :created, location: @task }
         format.turbo_stream
       else
@@ -50,6 +52,18 @@ class TasksController < ApplicationController
     end
   end
 
+  def toggle
+    @just_completed = !@task.status
+    @task.update!(status: !@task.status)
+    @task_list = @task.task_list
+    @all_complete = @just_completed && @task_list.tasks.any? && @task_list.tasks.all?(&:status)
+
+    respond_to do |format|
+      format.turbo_stream
+      format.html { redirect_to task_list_path(@task_list) }
+    end
+  end
+
   # DELETE /tasks/1 or /tasks/1.json
   def destroy
     @task.destroy
@@ -61,12 +75,11 @@ class TasksController < ApplicationController
 
   private
 
-  # Use callbacks to share common setup or constraints between actions.
   def set_task
     @task = Task.find(params[:id])
+    head :forbidden and return unless @task.task_list.user_id == current_user.id
   end
 
-  # Only allow a list of trusted parameters through.
   def task_params
     params.require(:task).permit(:title, :status, :task_list_id)
   end

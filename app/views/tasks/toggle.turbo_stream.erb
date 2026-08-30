@@ -1,9 +1,7 @@
-<%= turbo_stream.update "new_task", "" %>
-
-<%= turbo_stream.remove "tasks_empty" %>
-<%= turbo_stream.prepend "tasks" do %>
-  <%= render "tasks/task", task: @task, just_created: true %>
+<%= turbo_stream.replace dom_id(@task) do %>
+  <%= render "tasks/task", task: @task, just_completed: @just_completed && @task.status? %>
 <% end %>
+
 <%= turbo_stream.update "task_list_stats" do %>
   <%= render "task_lists/stats", task_list: @task_list %>
 <% end %>

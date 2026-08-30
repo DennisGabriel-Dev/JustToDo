@@ -1,9 +1,19 @@
-<div id="<%= dom_id task %>" class="task-row <%= 'task-row--done' if task.status %>">
-  <div class="task-row__check">
+<div id="<%= dom_id task %>"
+     class="task-row <%= 'task-row--done' if task.status %> <%= 'task-row--pop' if local_assigns[:just_completed] || local_assigns[:just_created] %>">
+  <%= button_to toggle_task_path(task),
+      method: :patch,
+      class: "task-row__check #{'task-row__check--done' if task.status}",
+      form: {
+        class: "task-row__check-form",
+        data: {
+          controller: "task-toggle",
+          action: "submit->task-toggle#markIntent turbo:submit-end->task-toggle#onComplete"
+        }
+      } do %>
     <% if task.status %>
       <i class="fas fa-check"></i>
     <% end %>
-  </div>
+  <% end %>
   <span class="task-row__title"><%= task.title %></span>
   <span class="task-row__badge <%= task.status ? 'task-row__badge--done' : 'task-row__badge--pending' %>">
     <%= task.status ? 'Feito' : 'Pendente' %>
