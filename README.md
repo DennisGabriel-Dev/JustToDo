@@ -64,9 +64,10 @@ O projeto inclui um [Blueprint](https://render.com/docs/blueprint-spec) em [`ren
 
 1. Faça push do repositório para o GitHub.
 2. No [Render Dashboard](https://dashboard.render.com/) → **New** → **Blueprint** → conecte o repo.
-3. Ao criar, informe manualmente a variável **`RAILS_MASTER_KEY`** (conteúdo de `config/master.key` local).
-4. Aguarde o primeiro deploy. O entrypoint roda `db:prepare` automaticamente.
-5. (Opcional) Para popular dados demo no primeiro deploy, adicione `RUN_SEEDS=true` nas env vars do serviço e redeploy. Depois pode remover.
+3. Aguarde o primeiro deploy. O entrypoint roda `db:prepare` automaticamente.
+4. (Opcional) Para popular dados demo no primeiro deploy, adicione `RUN_SEEDS=true` nas env vars do serviço e redeploy. Depois pode remover.
+
+**Se o deploy falhar com `key must be 16 bytes`:** no dashboard do serviço, vá em **Environment** e **apague** a variável `RAILS_MASTER_KEY` se existir (valor incorreto quebra o boot). Este app usa só `SECRET_KEY_BASE`.
 
 Login demo (se rodou seed): `demo@justtodo.dev` / `Demo1234`
 
@@ -76,7 +77,6 @@ Login demo (se rodou seed): `demo@justtodo.dev` / `Demo1234`
 |---|---|
 | `DATABASE_URL` | Postgres no Render (automático via Blueprint) |
 | `SECRET_KEY_BASE` | Gerada pelo Render (automático) |
-| `RAILS_MASTER_KEY` | Você informa manualmente |
 | `RAILS_SERVE_STATIC_FILES` | `true` (no Blueprint) |
 | `RAILS_LOG_TO_STDOUT` | `true` (no Blueprint) |
 | `RUN_SEEDS` | `true` só no primeiro deploy (opcional) |
