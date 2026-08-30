@@ -1,0 +1,12 @@
+#!/bin/bash
+set -e
+
+mkdir -p tmp/pids tmp/cache
+rm -f tmp/pids/server.pid
+
+bundle check || bundle install
+
+bundle exec rails db:prepare
+bundle exec rails db:seed
+
+exec "$@"

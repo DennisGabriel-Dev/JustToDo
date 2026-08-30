@@ -1,32 +1,39 @@
-# Just To Do 
-* Ruby version -> 3.2.2
-* Rails version -> 7.0.8
+# Just To Do
 
-## In this project I use database:
-* PostgreSQL, Hotwire Framework in addition to Ruby on Rails
+Ruby 3.3.3 · Rails 7.1.4 · PostgreSQL · Hotwire
 
-## For execute this project:
-1. Clone this repository or download it:<br>
-    ```$ git clone https://github.com/DennisGabriel-Dev/JustToDo.git```
+## Rodar com Docker
 
-2. Enter the repository cloned and run bundle:<br>
-    ```
-    $ cd JustToDo
-    $ bundle    
-   ```
-4. Enter in config/database.yml and configure with in your credentials
-only change this fields: <br>
+1. Copie o env e gere uma `SECRET_KEY_BASE`:
+
+```bash
+cp .env.example .env
 ```
-default: &default
-  ...
-  username: postgres   #your postgres' username
-  password: root       #your postgres' password
-  ...
+
+No `.env`, troque o valor por uma chave (por exemplo: `openssl rand -hex 64`).
+
+2. Suba o app e o banco:
+
+```bash
+docker compose up --build
 ```
-4. Create database and migrate data:<br>
-    ```$ rails db:create```<br>
-    ```$ rails db:migrate```<br>
-    Enter in your PostgreSQL database to see the database flux <br>
-    The name database created was: `just_to_do2`
-5. And Finally: <br>
-  ```$ rails s```
+
+3. Abra [http://localhost:3000](http://localhost:3000)
+
+Login de demonstração (criado pelo seed):
+
+- e-mail: `demo@justtodo.dev`
+- senha: `Demo1234`
+
+Para recriar o banco e popular de novo:
+
+```bash
+docker compose run --rm web bundle exec rails db:reset
+```
+
+## Rodar sem Docker
+
+1. Configure `config/database.yml` (ou as variáveis `DATABASE_HOST`, `DATABASE_USERNAME` e `DATABASE_PASSWORD`).
+2. `bundle install`
+3. `bin/rails db:prepare db:seed`
+4. `bin/rails server`

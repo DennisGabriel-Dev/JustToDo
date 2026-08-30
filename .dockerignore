@@ -1,0 +1,10 @@
+.git
+.env
+log/*
+tmp/*
+!tmp/.keep
+storage/*
+node_modules
+vendor/bundle
+*.md
+tasks
