@@ -13,4 +13,4 @@ development:
 
 test:
   <<: *default
-  database: just_to_do2
+  database: just_to_do2_test

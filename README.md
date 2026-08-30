@@ -37,3 +37,18 @@ docker compose run --rm web bundle exec rails db:reset
 2. `bundle install`
 3. `bin/rails db:prepare db:seed`
 4. `bin/rails server`
+
+## CI (GitHub Actions)
+
+A cada push ou pull request na branch `main`/`master`, o workflow [`.github/workflows/ci.yml`](.github/workflows/ci.yml) roda:
+
+1. **RSpec** — `db:prepare` + suite de testes (PostgreSQL 16)
+2. **RuboCop** — lint com config Shopify + baseline em `.rubocop_todo.yml`
+
+Rodar localmente (com Docker):
+
+```bash
+docker compose exec web bundle exec rubocop --parallel
+docker compose exec -e RAILS_ENV=test web bundle exec rails db:prepare
+docker compose exec -e RAILS_ENV=test web bundle exec rspec
+```
