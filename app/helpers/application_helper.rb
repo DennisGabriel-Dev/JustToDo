@@ -42,4 +42,12 @@ module ApplicationHelper
       { class: "task-row__due--future", label: task.due_at.strftime("%d/%m") }
     end
   end
+
+  def task_priority_class(priority)
+    "task-row__priority--#{priority.presence || 'medium'}"
+  end
+
+  def task_priority_label(priority)
+    Task::PRIORITIES[priority.presence || "medium"]
+  end
 end

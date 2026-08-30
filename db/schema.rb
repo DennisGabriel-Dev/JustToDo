@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2026_08_30_194259) do
+ActiveRecord::Schema[7.1].define(version: 2026_08_30_195503) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -33,6 +33,8 @@ ActiveRecord::Schema[7.1].define(version: 2026_08_30_194259) do
     t.datetime "deleted_at"
     t.integer "position"
     t.datetime "due_at"
+    t.string "priority"
+    t.string "tags"
     t.index ["deleted_at"], name: "index_tasks_on_deleted_at"
     t.index ["task_list_id"], name: "index_tasks_on_task_list_id"
   end

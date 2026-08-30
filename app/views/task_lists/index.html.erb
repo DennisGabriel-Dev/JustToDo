@@ -2,6 +2,8 @@
   <div class="<%= flash_class(:success) %>"><%= flash[:notice] %></div>
 <% end %>
 
+<%= render "dashboard", dashboard: @dashboard %>
+
 <div class="page-header">
   <div>
     <h2 class="page-header__title">Suas listas</h2>

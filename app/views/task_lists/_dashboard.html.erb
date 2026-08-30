@@ -1,0 +1,44 @@
+<div class="dashboard" id="dashboard">
+  <div class="dashboard__card">
+    <div class="dashboard__icon dashboard__icon--pending">
+      <i class="fas fa-list-check"></i>
+    </div>
+    <div class="dashboard__body">
+      <span class="dashboard__value"><%= dashboard[:pending] %></span>
+      <span class="dashboard__label">Pendentes</span>
+    </div>
+  </div>
+
+  <div class="dashboard__card <%= 'dashboard__card--alert' if dashboard[:overdue].positive? %>">
+    <div class="dashboard__icon dashboard__icon--overdue">
+      <i class="fas fa-clock"></i>
+    </div>
+    <div class="dashboard__body">
+      <span class="dashboard__value"><%= dashboard[:overdue] %></span>
+      <span class="dashboard__label">Atrasadas</span>
+    </div>
+  </div>
+
+  <div class="dashboard__card">
+    <div class="dashboard__icon dashboard__icon--today">
+      <i class="fas fa-calendar-day"></i>
+    </div>
+    <div class="dashboard__body">
+      <span class="dashboard__value"><%= dashboard[:due_today] %></span>
+      <span class="dashboard__label">Vencem hoje</span>
+    </div>
+  </div>
+
+  <div class="dashboard__card dashboard__card--progress">
+    <div class="dashboard__body dashboard__body--wide">
+      <div class="dashboard__progress-header">
+        <span class="dashboard__label">Progresso geral</span>
+        <span class="dashboard__value dashboard__value--sm"><%= dashboard[:percent] %>%</span>
+      </div>
+      <div class="dashboard__progress">
+        <div class="dashboard__progress-bar" style="width: <%= dashboard[:percent] %>%"></div>
+      </div>
+      <span class="dashboard__meta"><%= dashboard[:done] %> de <%= dashboard[:total] %> concluídas</span>
+    </div>
+  </div>
+</div>

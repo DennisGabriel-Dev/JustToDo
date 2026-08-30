@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="pt-BR" data-controller="theme">
+<html lang="pt-BR">
   <head>
     <script>
       (function () {
@@ -18,9 +18,10 @@
     <%= javascript_importmap_tags %>
   </head>
 
-  <body>
+  <body data-controller="appearance">
     <% if user_signed_in? %>
-      <div class="app">
+      <div class="app" data-controller="sidebar">
+        <div class="sidebar-backdrop" data-sidebar-target="backdrop" data-action="click->sidebar#close"></div>
         <%= render "layouts/sidebar" %>
         <div class="app-main">
           <%= render "layouts/header" %>
@@ -30,8 +31,8 @@
         </div>
       </div>
     <% else %>
-      <button type="button" class="auth-theme-toggle" data-action="theme#toggle" aria-label="Alternar tema">
-        <i class="fas fa-moon" data-theme-target="icon"></i>
+      <button type="button" class="auth-theme-toggle" data-action="appearance#toggle" aria-label="Alternar tema">
+        <i class="fas fa-moon" data-appearance-icon></i>
       </button>
       <%= yield %>
     <% end %>

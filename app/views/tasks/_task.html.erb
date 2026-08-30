@@ -17,13 +17,25 @@
       <i class="fas fa-check"></i>
     <% end %>
   <% end %>
-  <span class="task-row__title"><%= task.title %></span>
-  <% if (due = task_due_label(task)) %>
-    <span class="task-row__due <%= due[:class] %>"><%= due[:label] %></span>
-  <% end %>
-  <span class="task-row__badge <%= task.status ? 'task-row__badge--done' : 'task-row__badge--pending' %>">
-    <%= task.status ? 'Feito' : 'Pendente' %>
-  </span>
+  <span class="task-row__priority <%= task_priority_class(task.priority) %>" title="<%= task_priority_label(task.priority) %>"></span>
+  <div class="task-row__main">
+    <span class="task-row__title"><%= task.title %></span>
+    <% if task.tag_list.any? %>
+      <div class="task-row__tags">
+        <% task.tag_list.each do |tag| %>
+          <span class="task-row__tag"><%= tag %></span>
+        <% end %>
+      </div>
+    <% end %>
+  </div>
+  <div class="task-row__meta">
+    <% if (due = task_due_label(task)) %>
+      <span class="task-row__due <%= due[:class] %>"><%= due[:label] %></span>
+    <% end %>
+    <span class="task-row__badge <%= task.status ? 'task-row__badge--done' : 'task-row__badge--pending' %>">
+      <%= task.status ? 'Feito' : 'Pendente' %>
+    </span>
+  </div>
   <div class="task-row__actions">
     <%= link_to edit_task_path(task), class: "btn btn--icon", data: { turbo_frame: "new_task" }, title: "Editar" do %>
       <%= pencil_icon %>

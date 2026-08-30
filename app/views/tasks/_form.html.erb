@@ -13,6 +13,20 @@
   </div>
 
   <div class="form-group">
+    <%= form.label :priority, "Prioridade", class: "form-label" %>
+    <%= form.select :priority,
+        Task::PRIORITIES.map { |value, label| [label, value] },
+        {},
+        class: "form-control" %>
+  </div>
+
+  <div class="form-group">
+    <%= form.label :tags, "Tags", class: "form-label" %>
+    <%= form.text_field :tags, class: "form-control", placeholder: "trabalho, urgente, casa" %>
+    <small class="form-hint">Separe com vírgulas</small>
+  </div>
+
+  <div class="form-group">
     <%= form.label :due_at, "Data limite", class: "form-label" %>
     <%= form.date_field :due_at, class: "form-control" %>
   </div>

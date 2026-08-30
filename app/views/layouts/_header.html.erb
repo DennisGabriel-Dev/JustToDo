@@ -1,9 +1,15 @@
 <header class="topbar">
+  <button type="button" class="topbar__menu btn btn--icon" data-action="sidebar#toggle" aria-label="Abrir menu">
+    <i class="fas fa-bars"></i>
+  </button>
+
   <h1 class="topbar__title">
     <% if controller_name == 'task_lists' && action_name == 'show' && defined?(@task_list) %>
       <%= @task_list.name %>
+    <% elsif controller_name == 'task_lists' && action_name == 'index' %>
+      Dashboard
     <% else %>
-      Minhas listas
+      JustToDo
     <% end %>
   </h1>
 

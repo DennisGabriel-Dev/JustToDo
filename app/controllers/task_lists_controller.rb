@@ -4,6 +4,7 @@ class TaskListsController < ApplicationController
   def index
     @q = TaskList.ransack(params[:q])
     @task_lists = @q.result(distinct: true).where(user_id: current_user.id).ordered
+    @dashboard = dashboard_for(current_user)
   end
 
   def show
@@ -23,6 +24,7 @@ class TaskListsController < ApplicationController
     respond_to do |format|
       if @task_list.save
         @lists_count = current_user.task_lists.count
+        @dashboard = dashboard_for(current_user)
         format.html { redirect_to task_list_url(@task_list), notice: t('.success') }
         format.json { render :show, status: :created, location: @task_list }
         format.turbo_stream
@@ -82,5 +84,21 @@ class TaskListsController < ApplicationController
 
   def task_list_params
     params.require(:task_list).permit(:name)
+  end
+
+  def dashboard_for(user)
+    tasks = Task.joins(:task_list).where(task_lists: { user_id: user.id })
+    pending = tasks.pending
+    total = tasks.count
+    done = tasks.done.count
+
+    {
+      pending: pending.count,
+      overdue: pending.overdue.count,
+      due_today: pending.due_today.count,
+      done: done,
+      total: total,
+      percent: total.zero? ? 0 : (done * 100.0 / total).round
+    }
   end
 end

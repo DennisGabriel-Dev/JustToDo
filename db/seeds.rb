@@ -7,18 +7,18 @@ end
 
 sample_lists = {
   "Pessoal e casa" => [
-    { title: "Pagar contas do mês", status: false },
-    { title: "Comprar café", status: true },
-    { title: "Agendar dentista", status: false }
+    { title: "Pagar contas do mês", status: false, priority: "high", tags: "finanças,urgente", due_at: 1.day.ago },
+    { title: "Comprar café", status: true, priority: "low", tags: "casa" },
+    { title: "Agendar dentista", status: false, priority: "medium", tags: "saúde", due_at: Date.current }
   ],
   "Trabalho da semana" => [
-    { title: "Revisar pull requests", status: false },
-    { title: "Atualizar o README", status: true },
-    { title: "Preparar demo da sexta", status: false }
+    { title: "Revisar pull requests", status: false, priority: "high", tags: "dev,código" },
+    { title: "Atualizar o README", status: true, priority: "medium", tags: "docs" },
+    { title: "Preparar demo da sexta", status: false, priority: "high", tags: "demo,trabalho", due_at: 3.days.from_now }
   ],
   "Estudos de Rails" => [
-    { title: "Ler guia do Hotwire", status: false },
-    { title: "Praticar turbo frames", status: true }
+    { title: "Ler guia do Hotwire", status: false, priority: "medium", tags: "rails,estudo" },
+    { title: "Praticar turbo frames", status: true, priority: "low", tags: "rails" }
   ]
 }
 
@@ -27,6 +27,9 @@ sample_lists.each do |name, tasks|
   tasks.each do |attrs|
     list.tasks.find_or_create_by!(title: attrs[:title]) do |task|
       task.status = attrs[:status]
+      task.priority = attrs[:priority]
+      task.tags = attrs[:tags]
+      task.due_at = attrs[:due_at] if attrs[:due_at]
     end
   end
 end
