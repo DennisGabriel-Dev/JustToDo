@@ -6,6 +6,11 @@ rm -f tmp/pids/server.pid
 
 bundle check || bundle install
 
+if [ "${RAILS_ENV}" = "production" ] && [ -z "${DATABASE_URL}" ]; then
+  echo "ERROR: DATABASE_URL is required in production. Create a Postgres on Render and set Internal Database URL."
+  exit 1
+fi
+
 bundle exec rails db:prepare
 
 if [ "${RAILS_ENV}" = "development" ] || [ "${RUN_SEEDS}" = "true" ]; then

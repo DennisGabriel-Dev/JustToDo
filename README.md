@@ -2,6 +2,27 @@
 
 Ruby 3.3.3 · Rails 7.1.4 · PostgreSQL · Hotwire
 
+**Em produção:** [https://justtodo-b1ue.onrender.com/](https://justtodo-b1ue.onrender.com/)
+
+Login de demonstração (seed local e produção):
+
+- e-mail: `demo@justtodo.dev`
+- senha: `Demo1234`
+
+## Telas
+
+Dashboard — listas, pendências, atrasadas e progresso:
+
+![Dashboard](images_from_app/dashboard.png)
+
+Lista de tarefas — filtros, tags, prioridade e atalhos:
+
+![Lista de tarefas](images_from_app/lista.png)
+
+Lista 100% concluída:
+
+![Lista concluída](images_from_app/lista-concluida.png)
+
 ## Rodar com Docker
 
 1. Copie o env e gere uma `SECRET_KEY_BASE`:
@@ -20,10 +41,7 @@ docker compose up --build
 
 3. Abra [http://localhost:3000](http://localhost:3000)
 
-Login de demonstração (criado pelo seed):
-
-- e-mail: `demo@justtodo.dev`
-- senha: `Demo1234`
+O seed cria o mesmo login de demonstração acima.
 
 Para recriar o banco e popular de novo:
 
@@ -52,33 +70,3 @@ docker compose exec web bundle exec rubocop --parallel
 docker compose exec -e RAILS_ENV=test web bundle exec rails db:prepare
 docker compose exec -e RAILS_ENV=test web bundle exec rspec
 ```
-
-## Deploy no Render
-
-O projeto inclui um [Blueprint](https://render.com/docs/blueprint-spec) em [`render.yaml`](render.yaml) com:
-
-- **Web Service** (Docker, stage `production` do Dockerfile)
-- **PostgreSQL** (plano free)
-
-### Passo a passo
-
-1. Faça push do repositório para o GitHub.
-2. No [Render Dashboard](https://dashboard.render.com/) → **New** → **Blueprint** → conecte o repo.
-3. Aguarde o primeiro deploy. O entrypoint roda `db:prepare` automaticamente.
-4. (Opcional) Para popular dados demo no primeiro deploy, adicione `RUN_SEEDS=true` nas env vars do serviço e redeploy. Depois pode remover.
-
-**Se o deploy falhar com `key must be 16 bytes`:** no dashboard do serviço, vá em **Environment** e **apague** a variável `RAILS_MASTER_KEY` se existir (valor incorreto quebra o boot). Este app usa só `SECRET_KEY_BASE`.
-
-Login demo (se rodou seed): `demo@justtodo.dev` / `Demo1234`
-
-### Variáveis de ambiente (produção)
-
-| Variável | Origem |
-|---|---|
-| `DATABASE_URL` | Postgres no Render (automático via Blueprint) |
-| `SECRET_KEY_BASE` | Gerada pelo Render (automático) |
-| `RAILS_SERVE_STATIC_FILES` | `true` (no Blueprint) |
-| `RAILS_LOG_TO_STDOUT` | `true` (no Blueprint) |
-| `RUN_SEEDS` | `true` só no primeiro deploy (opcional) |
-
-O Render expõe `RENDER_EXTERNAL_URL`; o app usa isso para HTTPS e URLs do Devise.
