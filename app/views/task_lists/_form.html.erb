@@ -1,19 +1,21 @@
 <%= form_with(model: task_list) do |form| %>
   <% if task_list.errors.any? %>
-      <ul>
-        <% task_list.errors.each do |error| %>
-          <li class="text-danger"><%= error.message %></li>
-        <% end %>
-      </ul>
+    <ul class="form-errors">
+      <% task_list.errors.each do |error| %>
+        <li><%= error.message %></li>
+      <% end %>
+    </ul>
   <% end %>
-  <div class="d-flex flex-column flex-md-row p-4 gap-4 py-md-5 align-items-center 
-            justify-content-center input-group" data-controller="modal">
-    <%= form.text_field :name, 
-        placeholder: I18n.t('attributes.task_list.name'), 
-        data: {action: "input->custom#update_hint", 
-        custom_target: "nameTaskList"},
-        class: 'form-control' %>
-    <h3 id="new_task_list_title"></h3>
-    <%= form.submit (I18n.t("task_lists.form.create")) , class: 'btn btn-info rounded', data: { action: "modal#clickModal"} %>
+
+  <div class="form-group">
+    <%= form.label :name, "Nome da lista", class: "form-label" %>
+    <%= form.text_field :name,
+        placeholder: "Ex: Trabalho da semana",
+        class: "form-control",
+        autofocus: true %>
+  </div>
+
+  <div class="form-actions">
+    <%= form.submit task_list.persisted? ? "Salvar" : "Criar lista", class: "btn btn--primary" %>
   </div>
 <% end %>

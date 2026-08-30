@@ -2,16 +2,10 @@
   <div class="pop-up">
     <div class="overlay"></div>
     <div class="modal-custom">
-        <div class="position-relative">
-          <h1><%= render 'utils/action_name'%>:
-            <span id="new_task_list_title"></span>
-          </h1>
-          <%= render "form", task_list: @task_list %>
-          <br>
-          <div>
-            <%= link_to "Back to task lists", task_lists_path %>
-          </div>
-        </div>
+      <h1><%= @task_list.persisted? ? "Editar lista" : "Nova lista" %></h1>
+      <%= render "form", task_list: @task_list %>
+      <div class="modal-custom__back">
+        <%= link_to "Cancelar", task_lists_path %>
       </div>
     </div>
   </div>

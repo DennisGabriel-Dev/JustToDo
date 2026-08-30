@@ -2,13 +2,10 @@
   <div class="pop-up">
     <div class="overlay"></div>
     <div class="modal-custom">
-      <div class="position-relative">
-        <h1><%= render "utils/action_name"%></h1>
-        <%= render "form", task: @task %>
-        <br>
-        <div>
-          <%= link_to "Back to tasks", task_lists_path(@task.task_list) %>
-        </div>
+      <h1>Nova tarefa</h1>
+      <%= render "form", task: @task %>
+      <div class="modal-custom__back">
+        <%= link_to "Cancelar", task_list_path(@task_list_id) %>
       </div>
     </div>
   </div>

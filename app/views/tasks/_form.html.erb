@@ -1,28 +1,25 @@
 <%= form_with(model: task) do |form| %>
   <% if task.errors.any? %>
-      <ul>
-        <% task.errors.each do |error| %>
-          <li><%= error.full_message %></li>
-        <% end %>
-      </ul>
+    <ul class="form-errors">
+      <% task.errors.each do |error| %>
+        <li><%= error.full_message %></li>
+      <% end %>
+    </ul>
   <% end %>
 
-  <div>
-    <%= form.label :title, style: "display: block" %>
-    <%= form.text_field :title %>
+  <div class="form-group">
+    <%= form.label :title, "Título", class: "form-label" %>
+    <%= form.text_field :title, class: "form-control", placeholder: "O que precisa ser feito?", autofocus: true %>
   </div>
 
-  <div>
-    <%= form.label :status, style: "display: block" %>
+  <div class="form-group form-check">
     <%= form.check_box :status %>
+    <%= form.label :status, "Marcar como concluída" %>
   </div>
 
-  <div style="display:none;">
-    <%= form.label :task_list_id, style: "display: block" %>
-    <%= form.text_field :task_list_id, value: @task_list_id %>
-  </div>
-  
-  <div>
-    <%= form.submit %>
+  <%= form.hidden_field :task_list_id, value: @task_list_id || task.task_list_id %>
+
+  <div class="form-actions">
+    <%= form.submit task.persisted? ? "Salvar" : "Criar tarefa", class: "btn btn--primary" %>
   </div>
 <% end %>

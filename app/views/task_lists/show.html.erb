@@ -1,16 +1,45 @@
-<div class="task-list card container mt-4">
-  <h2><%= @task_list.name %></h2>
-  <div class="tasks" id="tasks">
-    <% @task_list.tasks.each_with_index do |task, index| %>
-      <%= render "tasks/task", task: , class_personalized: 'task-list__task'%>
-    <% end %>
-    <%= link_to 'New Task',new_task_path(task_list_id: @task_list), data: {turbo_frame: "new_task"} %>
-  </div>
-  <div>
-    <%= link_to "Edit this task list", edit_task_list_path(@task_list) %> |
-    <%= link_to "Back to task lists", task_lists_path %>
+<% progress = task_list_progress(@task_list) %>
 
-    <%= button_to "Destroy this task list", @task_list, method: :delete, data: {turbo_confirm: 'Quer mesmo fazer isso?'} %>
+<nav class="breadcrumb">
+  <%= link_to "Listas", task_lists_path %>
+  <span class="breadcrumb__sep">/</span>
+  <span><%= @task_list.name %></span>
+</nav>
+
+<div class="task-board">
+  <div class="task-board__header">
+    <div>
+      <h2 class="task-board__title"><%= @task_list.name %></h2>
+      <p class="task-board__stats"><%= progress[:done] %> de <%= progress[:total] %> concluídas · <%= progress[:percent] %>%</p>
+    </div>
+    <div class="task-board__toolbar">
+      <%= link_to edit_task_list_path(@task_list), class: "btn btn--ghost", data: { turbo_frame: "new_task_list" } do %>
+        <i class="fas fa-pen"></i> Editar
+      <% end %>
+      <%= link_to new_task_path(task_list_id: @task_list), class: "btn btn--primary", data: { turbo_frame: "new_task" } do %>
+        <i class="fas fa-plus"></i> Nova tarefa
+      <% end %>
+    </div>
+  </div>
+
+  <div class="task-rows" id="tasks">
+    <% if @task_list.tasks.any? %>
+      <% @task_list.tasks.each do |task| %>
+        <%= render "tasks/task", task: task %>
+      <% end %>
+    <% else %>
+      <div class="task-board__empty">
+        <i class="fas fa-clipboard-list"></i>
+        <p>Nenhuma tarefa ainda. Crie a primeira!</p>
+      </div>
+    <% end %>
   </div>
 </div>
-<%= turbo_frame_tag "new_task"%>
+
+<div class="form-actions" style="margin-top: 20px;">
+  <%= link_to "← Voltar às listas", task_lists_path, class: "btn btn--ghost" %>
+  <%= button_to "Apagar lista", @task_list, method: :delete, data: { turbo_confirm: "Quer mesmo apagar esta lista?" }, class: "btn btn--ghost btn--danger" %>
+</div>
+
+<%= turbo_frame_tag "new_task_list" %>
+<%= turbo_frame_tag "new_task" %>
