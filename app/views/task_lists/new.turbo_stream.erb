@@ -1,3 +1,3 @@
-<%= turbo_frame_tag "new_task_list" do %>
+<%= turbo_stream.update "new_task_list" do %>
   <%= render "modal", task_list: @task_list, title: "Nova lista", cancel_path: task_lists_path %>
 <% end %>

@@ -1,0 +1,10 @@
+<div class="pop-up">
+  <div class="overlay"></div>
+  <div class="modal-custom">
+    <h1><%= title %></h1>
+    <%= render "form", task_list: task_list %>
+    <div class="modal-custom__back">
+      <%= link_to "Cancelar", cancel_path %>
+    </div>
+  </div>
+</div>
