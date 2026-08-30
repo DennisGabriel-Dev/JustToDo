@@ -15,7 +15,7 @@ class TaskList < ApplicationRecord
   scope :ordered, -> { order(id: :desc) }
 
   belongs_to :user
-  has_many :tasks, dependent: :destroy
+  has_many :tasks, -> { order(:position, :id) }, dependent: :destroy
   validates :name, presence: true, length: { minimum: 8, message: 'Texto curto demais' }
 
   def self.ransackable_attributes(auth_object = nil)

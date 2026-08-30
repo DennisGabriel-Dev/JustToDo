@@ -16,4 +16,17 @@ module ApplicationHelper
     done = tasks.count { |t| t.status }
     { percent: (done * 100.0 / total).round, done: done, total: total }
   end
+
+  def task_filter_class(current, value)
+    base = "task-filter"
+    current == value ? "#{base} #{base}--active" : base
+  end
+
+  def empty_task_message(filter)
+    case filter
+    when "pending" then "Nenhuma tarefa pendente."
+    when "done" then "Nenhuma tarefa concluída ainda."
+    else "Nenhuma tarefa ainda. Crie a primeira!"
+    end
+  end
 end

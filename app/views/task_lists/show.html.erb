@@ -6,7 +6,7 @@
   <span><%= @task_list.name %></span>
 </nav>
 
-<div class="task-board">
+<div class="task-board" data-controller="keyboard-shortcuts">
   <div class="task-board__header">
     <div>
       <h2 class="task-board__title"><%= @task_list.name %></h2>
@@ -16,24 +16,36 @@
       <%= link_to edit_task_list_path(@task_list), class: "btn btn--ghost", data: { turbo_frame: "new_task_list" } do %>
         <i class="fas fa-pen"></i> Editar
       <% end %>
-      <%= link_to new_task_path(task_list_id: @task_list), class: "btn btn--primary", data: { turbo_frame: "new_task" } do %>
+      <%= link_to new_task_path(task_list_id: @task_list),
+          class: "btn btn--primary",
+          data: { turbo_frame: "new_task", keyboard_shortcuts_target: "newLink" } do %>
         <i class="fas fa-plus"></i> Nova tarefa
       <% end %>
     </div>
   </div>
 
-  <div class="task-rows" id="tasks">
-    <% if @task_list.tasks.any? %>
-      <% @task_list.tasks.each do |task| %>
+  <div class="task-filters">
+    <%= link_to "Todas", task_list_path(@task_list, filter: "all"), class: task_filter_class(@filter, "all") %>
+    <%= link_to "Pendentes", task_list_path(@task_list, filter: "pending"), class: task_filter_class(@filter, "pending") %>
+    <%= link_to "Concluídas", task_list_path(@task_list, filter: "done"), class: task_filter_class(@filter, "done") %>
+  </div>
+
+  <div class="task-rows"
+       id="tasks"
+       data-controller="sortable"
+       data-sortable-url-value="<%= reorder_task_list_path(@task_list) %>">
+    <% if @tasks.any? %>
+      <% @tasks.each do |task| %>
         <%= render "tasks/task", task: task %>
       <% end %>
     <% else %>
-      <div class="task-board__empty" id="tasks_empty">
-        <i class="fas fa-clipboard-list"></i>
-        <p>Nenhuma tarefa ainda. Crie a primeira!</p>
-      </div>
+      <%= render "tasks/empty", filter: @filter %>
     <% end %>
   </div>
+
+  <p class="task-board__hint">
+    <kbd>N</kbd> nova tarefa · <kbd>Esc</kbd> fechar modal
+  </p>
 </div>
 
 <div class="form-actions" style="margin-top: 20px;">

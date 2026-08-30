@@ -1,0 +1,5 @@
+<%= turbo_stream.update "new_task", "" %>
+
+<%= turbo_stream.replace dom_id(@task) do %>
+  <%= render "tasks/task", task: @task %>
+<% end %>

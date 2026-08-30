@@ -1,24 +1,22 @@
 class TaskListsController < ApplicationController
-  before_action :set_task_list, only: %i[show edit update destroy]
+  before_action :set_task_list, only: %i[show edit update destroy reorder]
 
-  # GET /task_lists or /task_lists.json
   def index
     @q = TaskList.ransack(params[:q])
     @task_lists = @q.result(distinct: true).where(user_id: current_user.id).ordered
   end
 
-  # GET /task_lists/1 or /task_lists/1.json
-  def show; end
+  def show
+    @filter = params[:filter].presence_in(%w[all pending done]) || 'all'
+    @tasks = filtered_tasks
+  end
 
-  # GET /task_lists/new
   def new
     @task_list = TaskList.new
   end
 
-  # GET /task_lists/1/edit
   def edit; end
 
-  # POST /task_lists or /task_lists.json
   def create
     @task_list = TaskList.new(task_list_params)
     @task_list.user_id = current_user.id
@@ -36,7 +34,6 @@ class TaskListsController < ApplicationController
     end
   end
 
-  # PATCH/PUT /task_lists/1 or /task_lists/1.json
   def update
     respond_to do |format|
       if @task_list.update(task_list_params)
@@ -46,13 +43,12 @@ class TaskListsController < ApplicationController
       else
         format.html { render :edit, status: :unprocessable_entity }
         format.json { render json: @task_list.errors, status: :unprocessable_entity }
+        format.turbo_stream { render :edit, status: :unprocessable_entity }
       end
     end
   end
 
-  # DELETE /task_lists/1 or /task_lists/1.json
   def destroy
-    set_task_list
     @task_list.destroy
     flash[:notice] = t('task_lists.destroy.success')
     respond_to do |format|
@@ -61,15 +57,29 @@ class TaskListsController < ApplicationController
     end
   end
 
-  private
-
-  # Use callbacks to share common setup or constraints between actions.
-  def set_task_list
-    @task_list = TaskList.find(params[:id])
+  def reorder
+    Array(params[:task_ids]).each_with_index do |id, index|
+      @task_list.tasks.where(id: id).update_all(position: index + 1)
+    end
+    head :ok
   end
 
-  # Only allow a list of trusted parameters through.
+  private
+
+  def set_task_list
+    @task_list = current_user.task_lists.find(params[:id])
+  end
+
+  def filtered_tasks
+    tasks = @task_list.tasks.ordered
+    case @filter
+    when 'pending' then tasks.pending
+    when 'done' then tasks.done
+    else tasks
+    end
+  end
+
   def task_list_params
-    params.require(:task_list).permit!
+    params.require(:task_list).permit(:name)
   end
 end

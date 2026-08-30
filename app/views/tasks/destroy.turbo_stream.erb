@@ -1,0 +1,11 @@
+<%= turbo_stream.remove dom_id(@task) %>
+
+<%= turbo_stream.update "task_list_stats" do %>
+  <%= render "task_lists/stats", task_list: @task_list %>
+<% end %>
+
+<% if @tasks_empty %>
+  <%= turbo_stream.update "tasks" do %>
+    <%= render "tasks/empty", filter: params[:filter] %>
+  <% end %>
+<% end %>

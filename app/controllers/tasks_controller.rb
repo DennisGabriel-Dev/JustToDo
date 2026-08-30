@@ -1,28 +1,23 @@
 class TasksController < ApplicationController
   before_action :set_task, only: %i[show edit update destroy toggle]
 
-  # GET /tasks or /tasks.json
   def index
     respond_to do |format|
       format.html { redirect_to "/500", notice: "Rota não existente" }
     end
   end
 
-  # GET /tasks/1 or /tasks/1.json
-  def show
-  end
+  def show; end
 
-  # GET /tasks/new
   def new
     @task_list_id = params[:task_list_id]
     @task = Task.new
   end
 
-  # GET /tasks/1/edit
   def edit
+    @task_list_id = @task.task_list_id
   end
 
-  # POST /tasks or /tasks.json
   def create
     @task = Task.new(task_params)
     respond_to do |format|
@@ -41,15 +36,18 @@ class TasksController < ApplicationController
     end
   end
 
-  # PATCH/PUT /tasks/1 or /tasks/1.json
   def update
     respond_to do |format|
       if @task.update(task_params)
-        format.html { redirect_to task_url(@task), notice: "Task was successfully updated." }
+        @task_list = @task.task_list
+        format.html { redirect_to task_list_path(@task_list), notice: "Tarefa atualizada." }
         format.json { render :show, status: :ok, location: @task }
+        format.turbo_stream
       else
+        @task_list_id = @task.task_list_id
         format.html { render :edit, status: :unprocessable_entity }
         format.json { render json: @task.errors, status: :unprocessable_entity }
+        format.turbo_stream { render :edit, status: :unprocessable_entity }
       end
     end
   end
@@ -66,11 +64,14 @@ class TasksController < ApplicationController
     end
   end
 
-  # DELETE /tasks/1 or /tasks/1.json
   def destroy
+    @task_list = @task.task_list
     @task.destroy
+    @tasks_empty = @task_list.tasks.reload.empty?
+
     respond_to do |format|
-      format.html { redirect_to task_lists_url, notice: "Task was successfully destroyed." }
+      format.turbo_stream
+      format.html { redirect_to task_list_path(@task_list), notice: "Tarefa apagada." }
       format.json { head :no_content }
     end
   end
